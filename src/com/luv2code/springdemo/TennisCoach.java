@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component//("thatSillyCoach") to use default bean //so spring detect this class when component scanning starts. and then asigns the bean to this class.
-@Scope("prototype")
+@Scope("singleton")
 public class TennisCoach implements Coach {
 
 	@Autowired
@@ -19,6 +19,7 @@ public class TennisCoach implements Coach {
 	public TennisCoach() {
 		System.out.println("TennisCoach: inside default constructor");
 	}
+
 	/*
 	@Autowired
 	public TennisCoach(FortuneService theFortuneService) {
@@ -34,7 +35,8 @@ public class TennisCoach implements Coach {
 		this.fortuneService = thefortuneService;
 	}
 	*/
-	@Autowired//custom setter method. testing dependency injection. 
+
+	//@Autowired//custom setter method. testing dependency injection.
 	//you can use any method name with autowired to inject dependencies
 	/*public void doCrazyStuff(FortuneService thefortuneService) {
 		System.out.println("TennisCoach: inside doSomeCrazyStuff() method");
