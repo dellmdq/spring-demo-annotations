@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 @Component//("thatSillyCoach") to use default bean //so spring detect this class when component scanning starts. and then asigns the bean to this class.
 @Scope("singleton")
 public class TennisCoach implements Coach {
@@ -19,6 +22,19 @@ public class TennisCoach implements Coach {
 	public TennisCoach() {
 		System.out.println("TennisCoach: inside default constructor");
 	}
+
+	//define my init method
+	@PostConstruct
+	public void doMyStartupStuff() {
+		System.out.println(">> TennisCoach: inside of myDoStartupStuff()");
+	}
+
+	//define my destroy method
+	@PreDestroy
+	public void doMyCleanupStuff(){
+		System.out.println(">> TennisCoach: inside of my doMyCleanupStuff()");
+	}
+
 
 	/*
 	@Autowired

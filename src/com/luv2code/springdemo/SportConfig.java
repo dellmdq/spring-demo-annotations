@@ -1,0 +1,37 @@
+package com.luv2code.springdemo;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
+//@ComponentScan("com.luv2code.springdemo")
+@Configuration
+@PropertySource("classpath:sport.properties")
+public class SportConfig {
+
+    //define bean for our sad fortune service
+    @Bean
+    public FortuneService sadFortuneService(){
+        return new SadFortuneService();
+    }
+
+    //define bean for our swim coach AND inject dependency
+    @Bean
+    public Coach swimCoach(){
+        return new SwimCoach(sadFortuneService());
+    }
+
+    // ------------------Paddle Coach config----------------//
+
+    //define bean for our paddleFortuneService
+    @Bean
+    public FortuneService paddleFortuneService() { return new PaddleFortuneService();}
+
+
+    //define bean for our paddleCoach and
+    @Bean
+    public Coach paddleCoach(){ return new PaddleCoach(paddleFortuneService());}
+
+
+}

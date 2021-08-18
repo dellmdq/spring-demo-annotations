@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.stereotype.Component;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 @Component
 public class FileFortuneService implements FortuneService {
@@ -19,8 +21,8 @@ public class FileFortuneService implements FortuneService {
 	
 	//create random number generator
 	Random myRandom = new Random();
+
 	//file service method
-	
 	public FileFortuneService() {
 		
 		//set File
@@ -51,8 +53,9 @@ public class FileFortuneService implements FortuneService {
 	}
 
 	@Override
+	@PostConstruct
 	public String getFortune() {
-		
+		System.out.println("Inside FileFortuneService getFortune()");
 		String tempFortune = theFortunes.get((myRandom.nextInt(theFortunes.size())));
 	
 		return tempFortune;
